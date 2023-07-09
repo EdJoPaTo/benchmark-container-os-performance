@@ -1,0 +1,18 @@
+ARG VERSION
+
+FROM docker.io/library/alpine:$VERSION
+RUN apk upgrade --no-cache \
+  && apk add --no-cache bash ffmpeg g++ git hyperfine rustup \
+  && ffmpeg -version
+
+RUN rustup-init -y
+RUN ~/.cargo/bin/rustup default nightly-2023-04-11
+
+RUN git clone https://github.com/EdJoPaTo/meeting-countdown /build
+RUN cd /build && git checkout 32e6619e8080e21447b3bf4952a5862149b510ec
+
+WORKDIR /app
+COPY . ./
+RUN ls -al .
+
+ENTRYPOINT ["/app/bench.sh"]
