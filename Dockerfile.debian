@@ -1,21 +1,12 @@
-ARG VERSION
-
-FROM docker.io/library/debian:$VERSION
+FROM docker.io/library/rust:1.77-bookworm
 RUN apt-get update \
-  && apt-get upgrade -y \
-  && apt-get install -y bash curl ffmpeg g++ git hyperfine \
-  && apt-get clean \
-  && ffmpeg -version \
-  && rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
-
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
-RUN ~/.cargo/bin/rustup default nightly-2023-04-11
-
-RUN git clone https://github.com/EdJoPaTo/meeting-countdown /build
-RUN cd /build && git checkout 32e6619e8080e21447b3bf4952a5862149b510ec
+	&& apt-get upgrade -y \
+	&& apt-get install -y bash ffmpeg git hyperfine wget \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
 
 WORKDIR /app
 COPY . ./
-RUN ls -al .
+RUN ./clone.sh
 
-ENTRYPOINT ["/app/bench.sh"]
+CMD ["/app/bench.sh"]

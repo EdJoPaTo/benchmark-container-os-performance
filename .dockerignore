@@ -1,5 +1,4 @@
 .*
 *.md
 Dockerfile*
-download.sh
 run.sh
