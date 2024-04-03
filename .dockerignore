@@ -1,4 +1,6 @@
 .*
 *.md
+*.zip
 Dockerfile*
+meeting-countdown
 run.sh
