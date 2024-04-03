@@ -14,7 +14,14 @@ podman image ls
 echo "do tests"
 set -x
 
+# Run the benchmarks on the host system
 # ./bench.sh
 
 podman run --rm --init -it --tmpfs=/tmp test:alpine
 podman run --rm --init -it --tmpfs=/tmp test:debian
+
+podman run --rm --init -it \
+	--mount type=bind,source=./savegame.zip,destination=/factorio/saves/savegame.zip \
+	--entrypoint=/opt/factorio/bin/x64/factorio \
+	docker.io/factoriotools/factorio:1.1.104 \
+	--benchmark /factorio/saves/savegame.zip
