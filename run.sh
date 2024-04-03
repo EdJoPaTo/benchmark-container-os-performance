@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 set -eu -o pipefail
 
-echo "untag images"
-
-for version in $(podman image ls --filter=dangling=false --noheading --format="{{.Repository}}:{{.Tag}}" | rg localhost/test); do
-	podman image untag "$version" || true
-done
+shopt -s expand_aliases
+type podman &>/dev/null || alias podman=docker
 
 echo "build"
 
