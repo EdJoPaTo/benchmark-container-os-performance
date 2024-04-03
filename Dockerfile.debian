@@ -5,6 +5,8 @@ RUN apt-get update \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
 
+RUN git config --global advice.detachedHead false
+
 WORKDIR /app
 COPY . ./
 RUN ./clone.sh

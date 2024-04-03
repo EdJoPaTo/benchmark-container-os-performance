@@ -2,6 +2,8 @@ FROM docker.io/library/rust:1.77-alpine
 RUN apk upgrade --no-cache \
 	&& apk add --no-cache bash ffmpeg git hyperfine wget
 
+RUN git config --global advice.detachedHead false
+
 WORKDIR /app
 COPY . ./
 RUN ./clone.sh
