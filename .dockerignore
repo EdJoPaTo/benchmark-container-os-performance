@@ -2,5 +2,5 @@
 *.md
 *.zip
 Dockerfile*
-meeting-countdown
+build-rust
 run.sh

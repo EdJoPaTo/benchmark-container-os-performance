@@ -1,11 +1,14 @@
-FROM docker.io/library/rust:1.77-bookworm
+FROM docker.io/library/debian:bookworm-slim
 RUN apt-get update \
 	&& apt-get upgrade -y \
-	&& apt-get install -y bash ffmpeg git hyperfine wget \
+	&& apt-get install -y bash curl ffmpeg g++ git hyperfine wget \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
 
 RUN git config --global advice.detachedHead false
+
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --default-toolchain 1.77
+ENV PATH="/root/.cargo/bin:$PATH"
 
 WORKDIR /app
 COPY . ./

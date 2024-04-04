@@ -1,8 +1,11 @@
-FROM docker.io/library/rust:1.77-alpine
+FROM docker.io/library/alpine:3.19
 RUN apk upgrade --no-cache \
-	&& apk add --no-cache bash ffmpeg git hyperfine wget
+	&& apk add --no-cache bash ffmpeg g++ git hyperfine rustup wget
 
 RUN git config --global advice.detachedHead false
+
+RUN rustup-init -y --profile minimal --default-toolchain 1.77
+ENV PATH="/root/.cargo/bin:$PATH"
 
 WORKDIR /app
 COPY . ./
