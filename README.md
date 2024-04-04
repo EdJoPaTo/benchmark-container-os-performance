@@ -5,6 +5,9 @@ This tests some of my real world usages on Raspberry Pi and cloud servers.
 The host system needs `bash` and `podman` to run `./run.sh`.
 `docker` might work instead of `podman`.
 
+The general idea of this is not to provide absolute results.
+The goal is to compare different systems in relation to each other.
+
 ## Factorio Headless Benchmark
 
 You need a save-game for this and save it as `savegame.zip` in this folder.
