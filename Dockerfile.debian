@@ -1,13 +1,13 @@
-FROM docker.io/library/debian:bookworm-slim
+FROM docker.io/library/debian:trixie-slim
 RUN apt-get update \
 	&& apt-get upgrade -y \
-	&& apt-get install -y bash curl ffmpeg g++ git hyperfine wget \
+	&& apt-get install -y bash curl ffmpeg g++ git hyperfine rustup wget \
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/* /var/cache/* /var/log/*
 
 RUN git config --global advice.detachedHead false
 
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --default-toolchain 1.77
+RUN rustup toolchain install 1.77 --profile=minimal
 ENV PATH="/root/.cargo/bin:$PATH"
 
 WORKDIR /app
