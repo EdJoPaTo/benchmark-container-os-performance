@@ -23,5 +23,5 @@ podman run --rm --init -it --tmpfs=/tmp test:debian
 podman run --rm --init -it \
 	--mount type=bind,source=./savegame.zip,destination=/factorio/saves/savegame.zip \
 	--entrypoint=/opt/factorio/bin/x64/factorio \
-	docker.io/factoriotools/factorio:1.1.104 \
+	docker.io/factoriotools/factorio:2.0.60 \
 	--benchmark /factorio/saves/savegame.zip
