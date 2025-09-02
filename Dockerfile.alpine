@@ -1,11 +1,11 @@
 FROM docker.io/library/alpine:3
 RUN apk upgrade --no-cache \
-	&& apk add --no-cache bash ffmpeg g++ git hyperfine rustup wget
+	&& apk add --no-cache bash ffmpeg g++ git hyperfine rustup wget \
+	&& rustup-init -y --default-toolchain=none \
+	&& apk del --no-cache rustup
+ENV PATH="/root/.cargo/bin:$PATH"
 
 RUN git config --global advice.detachedHead false
-
-RUN rustup-init -y --profile minimal --default-toolchain 1.77
-ENV PATH="/root/.cargo/bin:$PATH"
 
 WORKDIR /app
 COPY . ./
