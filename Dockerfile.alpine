@@ -1,8 +1,7 @@
 FROM docker.io/library/alpine:3
 RUN apk upgrade --no-cache \
 	&& apk add --no-cache bash ffmpeg g++ git hyperfine rustup wget \
-	&& rustup-init -y --default-toolchain=none \
-	&& apk del --no-cache rustup
+	&& rustup-init -y --default-toolchain=none
 ENV PATH="/root/.cargo/bin:$PATH"
 
 RUN git config --global advice.detachedHead false
