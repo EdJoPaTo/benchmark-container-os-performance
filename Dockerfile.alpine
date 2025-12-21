@@ -7,7 +7,8 @@ ENV PATH="/root/.cargo/bin:$PATH"
 RUN git config --global advice.detachedHead false
 
 WORKDIR /app
-COPY . ./
+COPY clone.sh ./
 RUN ./clone.sh
+COPY . ./
 
 CMD ["/app/bench.sh"]

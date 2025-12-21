@@ -8,7 +8,8 @@ RUN apt-get update \
 RUN git config --global advice.detachedHead false
 
 WORKDIR /app
-COPY . ./
+COPY clone.sh ./
 RUN ./clone.sh
+COPY . ./
 
 CMD ["/app/bench.sh"]
